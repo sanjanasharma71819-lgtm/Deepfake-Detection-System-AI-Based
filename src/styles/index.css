@@ -1,0 +1,89 @@
+.dashboard {
+  padding: 80px;
+  background-image: url("https://img.freepik.com/premium-photo/deepfake-concept-background_78899-7279.jpg?w=996");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+/* HERO SECTION */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.hero-left {
+  max-width: 80%;
+}
+
+.hero-title {
+  font-size: 60px;
+  font-weight: bold;
+  line-height: 1.1;
+}
+
+.hero-sub {
+  margin-top: 20px;
+  color: hsl(253, 20%, 65%);
+  max-width: 800px;
+}
+
+.hero-right {
+  display: flex;
+  gap: 20px;
+}
+
+/* FEATURE CARDS */
+.feature-card {
+  width: 200px;
+  height: 250px;
+  background: hsl(194, 33%, 17%);
+  padding: 30;
+  border-radius: 12px;
+}
+.primary-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-btn::after {
+  content: "";
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10.01%);
+  background-size: 10px 10px;
+  animation: glow 3s linear infinite;
+}
+
+@keyframes glow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+}
+.progress-container {
+  width: 100%;
+  background: #ddd;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #243b55;
+  transition: width 1s ease-in-out;
+}

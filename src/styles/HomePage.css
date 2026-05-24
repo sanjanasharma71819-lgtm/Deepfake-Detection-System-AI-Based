@@ -1,0 +1,253 @@
+html{
+  scroll-behavior: smooth;
+}
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #110f27, hsl(242, 35%, 19%), #2c5364, #1a2a6c);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color: rgb(255, 255, 255);
+  padding-bottom: 50px;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar li {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.navbar li:hover {
+  color: hsl(208, 68%, 4%);
+}
+
+.logo {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* HERO */
+.hero-section {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.hero-section h1 {
+  font-size: 38px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #0080ff,
+               0 0 20px #0022ff,
+               0 0 40px #0015ff99;
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #00ffcc; }
+  to { text-shadow: 0 0 25px #00ffcc; }
+}
+
+.hero-box {
+  width: 60%;
+  margin: auto;
+  padding: 25px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px rgba(0,255,204,0.3);
+}
+
+/* FEATURES */
+.feature-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.feature-card {
+  width: 260px;
+  padding: 25px;
+  background: #ffffff14;
+  border-radius: 15px;
+  text-align: center;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px hwb(0 0% 100% / 0.4);
+}
+
+.feature-card img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+.feature-card {
+  width: 260px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 15px;
+  text-align: center;
+  transition: 0.4s ease;
+  cursor: pointer;
+  animation: floatCard 4s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.feature-card:hover {
+  transform: translateY(-15px) scale(1.05);
+  box-shadow: 0 0 25px rgba(115, 0, 255, 0.6);
+}
+
+/* HOW SECTION */
+.how-section {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.how-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.how-card {
+  width: 250px;
+  padding: 20px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+.how-card img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.how-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px rgba(0,255,204,0.5);
+}
+
+/* FAQ */
+.faq-section {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.faq-item {
+  width: 60%;
+  margin: 20px auto;
+  background: rgba(255,255,255,0.07);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* CONTACT */
+.contact-section {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.contact-section form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: auto;
+  gap: 15px;
+}
+
+.contact-section input,
+.contact-section textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+.contact-section button {
+  padding: 10px;
+  border: none;
+  background: #00ffcc;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.footer {
+  margin-top: 80px;
+  padding: 30px;
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+}
+
+.footer p {
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  transition: 0.4s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background: #00ffcc;
+  color: black;
+  transform: translateY(-6px) scale(1.1);
+  box-shadow: 0 0 20px #00ffcc;
+}
+.footer-social {
+  margin-top: 15px;
+}
+
+.footer-social a {
+  color: white;
+  font-size: 20px;
+  margin: 0 10px;
+  transition: 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #00f2ff;
+  transform: scale(1.2);
+}
