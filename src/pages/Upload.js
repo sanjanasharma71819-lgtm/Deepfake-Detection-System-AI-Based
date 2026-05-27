@@ -43,7 +43,7 @@ const Upload = () => {
       formData.append("file", file);
 
       const response = await fetch(
-        "http://127.0.0.1:8000/predict/",
+        "https://deepfake-detection-system-ai-based-77ze.onrender.com/predict/",
         {
           method: "POST",
           body: formData,

@@ -10,7 +10,7 @@ const Heatmap = () => {
     formData.append("file", file);
 
     const res = await axios.post(
-      "http://127.0.0.1:8000/heatmap/",
+      "https://deepfake-detection-system-ai-based-77ze.onrender.com/heatmap/",
       formData,
       { responseType: "blob" }
     );
