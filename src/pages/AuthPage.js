@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import "../styles/AuthPage.css";
-import { signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../firebase";
 
 const AuthPage = () => {
@@ -50,12 +50,11 @@ const AuthPage = () => {
 
           {isLogin && (
             <div
-              className="forgot"
-              onClick={handleForgotPassword}
-              style={{ cursor: "pointer" }}
-            >
-              Forgot Password?
-            </div>
+  className="forgot"
+  style={{ cursor: "pointer" }}
+>
+  Forgot Password?
+</div>
           )}
 
           <button type="submit">
