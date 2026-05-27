@@ -92,14 +92,7 @@ const Result = () => {
             </p>
           </div>
 
-          {/* EfficientNet */}
-          <div className="model-box">
-            <h3>EfficientNet Model</h3>
-            <p>{state.efficientnet?.label}</p>
-            <p>
-              {((state.efficientnet?.confidence || 0) * 100).toFixed(2)}%
-            </p>
-          </div>
+          
 
           <button onClick={() => navigate("/dashboard")}>
             Back to Dashboard
