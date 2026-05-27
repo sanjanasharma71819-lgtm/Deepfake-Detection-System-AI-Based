@@ -29,11 +29,18 @@ def home():
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
 
-    file_path = os.path.join(UPLOAD_DIR, file.filename)
+    try:
+        file_path = os.path.join(UPLOAD_DIR, file.filename)
 
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+        with open(file_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
 
-    result = compare_models(file_path)
+        result = compare_models(file_path)
 
-    return result
+        return result
+
+    except Exception as e:
+        return {
+            "error": "backend crashed",
+            "details": str(e)
+        }
