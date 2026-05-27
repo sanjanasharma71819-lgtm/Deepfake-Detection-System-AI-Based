@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import "../styles/AuthPage.css";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
 import { auth, provider } from "../firebase";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -15,20 +16,27 @@ const AuthPage = () => {
   };
 
   const handleGoogleLogin = async () => {
-  try {
-    await signInWithPopup(auth, provider);
-    navigate("/dashboard");
-  } catch (error) {
-    alert(error.message);
-  }
-};
-  const handleForgotPassword = () => {
-  const email = prompt("Enter your registered email:");
+    try {
+      await signInWithPopup(auth, provider);
+      navigate("/dashboard");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
-  if (!email) return;
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Please enter your email first.");
+      return;
+    }
 
-  alert("Password reset link sent to " + email);
-};
+    try {
+      await sendPasswordResetEmail(auth, email);
+      alert("Password reset email sent!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="auth-container">
@@ -38,15 +46,45 @@ const AuthPage = () => {
         <h2>{isLogin ? "Login" : "Create Account"}</h2>
 
         <form onSubmit={handleSubmit}>
-          {!isLogin && <input type="text" placeholder="Full Name" required />}
-          <input type="email" placeholder="Email" required />
+          {!isLogin && (
+            <input type="text" placeholder="Full Name" required />
+          )}
+
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
           <input type="password" placeholder="Password" required />
-          {isLogin && <div className="forgot">Forgot Password?</div>}
-          <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
+
+          {isLogin && (
+            <div
+              className="forgot"
+              onClick={handleForgotPassword}
+              style={{ cursor: "pointer" }}
+            >
+              Forgot Password?
+            </div>
+          )}
+
+          <button type="submit">
+            {isLogin ? "Login" : "Sign Up"}
+          </button>
         </form>
 
-        <div style={{ textAlign: "center", margin: "15px 0", color: "#aaa" }}>OR</div>
-        
+        <div
+          style={{
+            textAlign: "center",
+            margin: "15px 0",
+            color: "#aaa",
+          }}
+        >
+          OR
+        </div>
+
         <button
           onClick={handleGoogleLogin}
           style={{
@@ -67,8 +105,13 @@ const AuthPage = () => {
           Continue with Google
         </button>
 
-        <div className="toggle-link" onClick={() => setIsLogin(!isLogin)}>
-          {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"}
+        <div
+          className="toggle-link"
+          onClick={() => setIsLogin(!isLogin)}
+        >
+          {isLogin
+            ? "Don't have an account? Sign Up"
+            : "Already have an account? Login"}
         </div>
       </div>
     </div>
