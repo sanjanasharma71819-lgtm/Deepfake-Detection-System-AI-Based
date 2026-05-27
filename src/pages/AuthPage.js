@@ -7,7 +7,6 @@ import { auth, provider } from "../firebase";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -24,8 +23,6 @@ const AuthPage = () => {
     }
   };
 
- 
-
   return (
     <div className="auth-container">
       <div className="auth-card">
@@ -38,23 +35,17 @@ const AuthPage = () => {
             <input type="text" placeholder="Full Name" required />
           )}
 
-          <input
-            type="email"
-            placeholder="Email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="email" placeholder="Email" required />
 
           <input type="password" placeholder="Password" required />
 
           {isLogin && (
             <div
-  className="forgot"
-  style={{ cursor: "pointer" }}
->
-  Forgot Password?
-</div>
+              className="forgot"
+              style={{ cursor: "pointer" }}
+            >
+              Forgot Password?
+            </div>
           )}
 
           <button type="submit">
