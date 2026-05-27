@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Webcam = () => {
+const WebcamPage = () => {
   const webcamRef = useRef(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -29,7 +29,6 @@ const Webcam = () => {
 
       const result = response.data;
 
-     
       const newResult = {
         date: new Date().toLocaleString(),
         file: "Webcam Capture",
@@ -75,4 +74,4 @@ const Webcam = () => {
   );
 };
 
-export default Webcam;
+export default WebcamPage;
