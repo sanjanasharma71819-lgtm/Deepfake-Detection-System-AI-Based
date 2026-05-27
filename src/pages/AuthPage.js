@@ -24,19 +24,7 @@ const AuthPage = () => {
     }
   };
 
-  const handleForgotPassword = async () => {
-    if (!email) {
-      alert("Please enter your email first.");
-      return;
-    }
-
-    try {
-      await sendPasswordResetEmail(auth, email);
-      alert("Password reset email sent!");
-    } catch (error) {
-      alert(error.message);
-    }
-  };
+ 
 
   return (
     <div className="auth-container">
