@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const WebcamScan = () => {
+const Webcam = () => {
   const webcamRef = useRef(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
