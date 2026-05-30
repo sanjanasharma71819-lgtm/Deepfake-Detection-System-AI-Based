@@ -31,57 +31,61 @@ const Upload = () => {
   };
 
   const handleSubmit = async () => {
-    if (!file) {
-      alert("Please select a file first");
-      return;
-    }
+  if (!file) {
+    alert("Please select a file first");
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
 
-      const response = await fetch(
-        "https://deepfake-detection-system-ai-based-77ze.onrender.com/predict",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Server error");
+    const response = await fetch(
+      "https://deepfake-detection-system-ai-based-77ze.onrender.com/predict",
+      {
+        method: "POST",
+        body: formData,
       }
+    );
 
-      const data = await response.json();
-
-      if (!data || !data.final_prediction) {
-  throw new Error("Invalid response from backend");
-}
-
-      
-      const existing =
-        JSON.parse(localStorage.getItem("scanResults")) || [];
-
-      existing.unshift({
-        date: new Date().toLocaleString(),
-        file: file.name,
-        label: data.final_prediction,
-        confidence: data.confidence,
-      });
-
-      localStorage.setItem("scanResults", JSON.stringify(existing));
-
-      navigate("/result", { state: data });
-
-    } catch (error) {
-    console.log("Backend Response:", data);
-    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
     }
 
+    const data = await response.json();
+
+    console.log("Backend Response:", data);
+
+    if (!data || !data.final_prediction) {
+      throw new Error("Invalid response from backend");
+    }
+
+    const existing =
+      JSON.parse(localStorage.getItem("scanResults")) || [];
+
+    existing.unshift({
+      date: new Date().toLocaleString(),
+      file: file.name,
+      label: data.final_prediction,
+      confidence: data.confidence,
+    });
+
+    localStorage.setItem(
+      "scanResults",
+      JSON.stringify(existing)
+    );
+
+    navigate("/result", { state: data });
+
+  } catch (error) {
+    console.error("Upload Error:", error);
+    alert("Backend connection failed or invalid response");
+  } finally {
     setLoading(false);
-  };
+  }
+};
 
   return (
     <div className="upload-wrapper">
