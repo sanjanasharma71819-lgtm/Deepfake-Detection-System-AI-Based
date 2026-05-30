@@ -7,10 +7,13 @@ from ml.compare import compare_models
 
 app = FastAPI()
 
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://deepfake-detection-system-ai-based-three.vercel.app"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://deepfake-detection-system-ai-based-ten.vercel.app",
+        "https://deepfake-detection-system-ai-based-three.vercel.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -25,10 +28,8 @@ def home():
     return {"status": "backend running"}
 
 
-
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
-
     try:
         file_path = os.path.join(UPLOAD_DIR, file.filename)
 
