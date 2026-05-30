@@ -7,7 +7,7 @@ export const predictImage = async (file) => {
   formData.append("file", file);
 
   const response = await axios.post(
-    `${API_URL}/predict/`,
+    `${API_URL}/predict`,
     formData,
     {
       headers: {
