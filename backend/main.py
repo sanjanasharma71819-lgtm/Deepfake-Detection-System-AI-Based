@@ -10,7 +10,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://deepfake-detection-system-ai-based-three.vercel.app"],
+    allow_origins=[True],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
