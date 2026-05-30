@@ -43,7 +43,7 @@ const Upload = () => {
       formData.append("file", file);
 
       const response = await fetch(
-        "https://deepfake-detection-system-ai-based-77ze.onrender.com/predict/",
+        "https://deepfake-detection-system-ai-based-77ze.onrender.com/predict",
         {
           method: "POST",
           body: formData,
@@ -56,9 +56,9 @@ const Upload = () => {
 
       const data = await response.json();
 
-      if (!data || !data.final) {
-        throw new Error("Invalid response from backend");
-      }
+      if (!data || !data.final_prediction) {
+  throw new Error("Invalid response from backend");
+}
 
       
       const existing =
@@ -67,8 +67,8 @@ const Upload = () => {
       existing.unshift({
         date: new Date().toLocaleString(),
         file: file.name,
-        label: data.final.label,
-        confidence: data.final.confidence,
+        label: data.final_prediction,
+        confidence: data.confidence,
       });
 
       localStorage.setItem("scanResults", JSON.stringify(existing));
@@ -76,8 +76,8 @@ const Upload = () => {
       navigate("/result", { state: data });
 
     } catch (error) {
-      console.log(error);
-      alert("Backend connection failed or invalid response");
+    console.log("Backend Response:", data);
+    const data = await response.json();
     }
 
     setLoading(false);
