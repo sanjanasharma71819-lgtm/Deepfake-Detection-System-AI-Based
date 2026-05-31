@@ -35,28 +35,27 @@ const Result = () => {
   const isFake = label === "FAKE";
 
 
-  useEffect(() => {
-    if (!state) return;
+  
+useEffect(() => {
+  if (!state) return;
 
-    const existing =
-      JSON.parse(localStorage.getItem("scanResults")) || [];
+  const existing =
+    JSON.parse(localStorage.getItem("scanResults")) || [];
 
-    const newEntry = {
-      date: new Date().toLocaleString(),
-      file: fileName,
-      label: label,
-      confidence: confidence,
-    };
+  const newEntry = {
+    date: new Date().toLocaleString(),
+    file: fileName,
+    label: label,
+    confidence: confidence,
+  };
 
-    existing.push(newEntry);
+  existing.push(newEntry);
 
-    localStorage.setItem(
-      "scanResults",
-      JSON.stringify(existing)
-    );
-  }, [state]);
-
-  // If no data
+  localStorage.setItem(
+    "scanResults",
+    JSON.stringify(existing)
+  );
+}, [state, fileName, label, confidence]);
   if (!state) {
     return (
       <div className="result-container">
