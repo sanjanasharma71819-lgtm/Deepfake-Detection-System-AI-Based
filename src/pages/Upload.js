@@ -58,7 +58,7 @@ const Upload = () => {
 
     console.log("Backend Response:", data);
 
-    if (!data || !data.final_prediction) {
+    if (!data || !data.success) {
       throw new Error("Invalid response from backend");
     }
 

@@ -10,7 +10,6 @@ const Result = () => {
 
   const [loading, setLoading] = useState(true);
 
- 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -18,6 +17,22 @@ const Result = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+ 
+  const result = state?.result || state || {};
+  const label =
+    result?.final_prediction ||
+    result?.label ||
+    "UNKNOWN";
+
+  const confidence =
+    result?.confidence ||
+    0;
+
+  const fileName =
+    state?.file || state?.filename || "unknown";
+
+  const isFake = label === "FAKE";
 
 
   useEffect(() => {
@@ -28,9 +43,9 @@ const Result = () => {
 
     const newEntry = {
       date: new Date().toLocaleString(),
-      file: state.filename || "unknown",
-      label: state.final?.label || "UNKNOWN",
-      confidence: state.final?.confidence || 0,
+      file: fileName,
+      label: label,
+      confidence: confidence,
     };
 
     existing.push(newEntry);
@@ -41,7 +56,7 @@ const Result = () => {
     );
   }, [state]);
 
- 
+  // If no data
   if (!state) {
     return (
       <div className="result-container">
@@ -50,8 +65,6 @@ const Result = () => {
       </div>
     );
   }
-
-  const isFake = state.final?.label === "FAKE";
 
   return (
     <div className="result-container">
@@ -73,26 +86,14 @@ const Result = () => {
               background: isFake ? "#ff4b2b" : "#28a745",
             }}
           >
-            {state.final?.label} DETECTED
+            {label} DETECTED
           </div>
 
           <p>
-            Confidence:{" "}
-            {((state.final?.confidence || 0) * 100).toFixed(2)}%
+            Confidence: {(confidence * 100).toFixed(2)}%
           </p>
 
-          <p>File: {state.filename}</p>
-
-          {/* CNN */}
-          <div className="model-box">
-            <h3>CNN Model</h3>
-            <p>{state.cnn?.label}</p>
-            <p>
-              {((state.cnn?.confidence || 0) * 100).toFixed(2)}%
-            </p>
-          </div>
-
-          
+          <p>File: {fileName}</p>
 
           <button onClick={() => navigate("/dashboard")}>
             Back to Dashboard
