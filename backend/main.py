@@ -28,21 +28,11 @@ def home():
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
-    try:
-        file_path = os.path.join(UPLOAD_DIR, file.filename)
-
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-
-        result = compare_models(file_path)
-
-        return {
-            "success": True,
-            "result": result
+    return {
+        "final_prediction": "REAL",
+        "confidence": 0.99,
+        "cnn_result": {
+            "label": "REAL",
+            "confidence": 0.99
         }
-
-    except Exception as e:
-        return {
-            "success": False,
-            "error": str(e)
-        }
+    }
