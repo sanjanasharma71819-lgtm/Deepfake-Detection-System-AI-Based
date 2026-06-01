@@ -2,6 +2,7 @@ import torch
 from PIL import Image
 import torchvision.transforms as transforms
 from ml.cnn_model import SimpleCNN
+import gc
 
 device = torch.device("cpu")
 
@@ -30,6 +31,7 @@ def predict_cnn(image_path):
     model = get_model()
 
     image = Image.open(image_path).convert("RGB")
+    image.thumbnail((224, 224))
     image = transform(image).unsqueeze(0)
 
     with torch.no_grad():
@@ -38,6 +40,11 @@ def predict_cnn(image_path):
 
         label = torch.argmax(prob).item()
         confidence = torch.max(prob).item()
+
+    del image
+    del output
+    del prob
+    gc.collect()
 
     return {
         "label": "FAKE" if label == 1 else "REAL",
