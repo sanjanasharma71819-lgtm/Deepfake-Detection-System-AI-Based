@@ -56,11 +56,12 @@ const Upload = () => {
 
     const data = await response.json();
 
-    console.log(data);
-
-    if (!data || !data.success) {
-      throw new Error("Invalid response from backend");
-    }
+    console.log("BACKEND RESPONSE:", data);
+    if (data.error) {
+  throw new Error(data.details || data.error);
+}
+    
+    
 
     const existing =
       JSON.parse(localStorage.getItem("scanResults")) || [];
@@ -77,7 +78,16 @@ const Upload = () => {
       JSON.stringify(existing)
     );
 
-    navigate("/result", { state: data });
+   navigate("/result", {
+  state: {
+    filename: file.name,
+    final: {
+      label: data.final_prediction,
+      confidence: data.confidence,
+    },
+    cnn: data.cnn_result,
+  },
+});
 
   } catch (error) {
     console.error("Upload Error:", error);
