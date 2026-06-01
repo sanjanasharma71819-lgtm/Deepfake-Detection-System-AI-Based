@@ -56,7 +56,7 @@ const Upload = () => {
 
     const data = await response.json();
 
-    console.log("Backend Response:", data);
+    console.log(data);
 
     if (!data || !data.success) {
       throw new Error("Invalid response from backend");
