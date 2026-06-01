@@ -5,9 +5,7 @@ from ml.cnn_model import SimpleCNN
 
 device = torch.device("cpu")
 
-model = SimpleCNN().to(device)
-model.load_state_dict(torch.load("models/cnn.pth", map_location=device))
-model.eval()
+model = None
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
@@ -15,7 +13,21 @@ transform = transforms.Compose([
 ])
 
 
+def get_model():
+    global model
+
+    if model is None:
+        model = SimpleCNN().to(device)
+        model.load_state_dict(
+            torch.load("models/cnn.pth", map_location=device)
+        )
+        model.eval()
+
+    return model
+
+
 def predict_cnn(image_path):
+    model = get_model()
 
     image = Image.open(image_path).convert("RGB")
     image = transform(image).unsqueeze(0)

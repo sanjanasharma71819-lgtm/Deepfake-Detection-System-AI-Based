@@ -30,9 +30,9 @@ def home():
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
-    try:
-        file_path = os.path.join(UPLOAD_DIR, file.filename)
+    file_path = os.path.join(UPLOAD_DIR, file.filename)
 
+    try:
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
@@ -45,3 +45,7 @@ async def predict(file: UploadFile = File(...)):
             "error": "backend crashed",
             "details": str(e)
         }
+
+    finally:
+        if os.path.exists(file_path):
+            os.remove(file_path)
