@@ -2,7 +2,9 @@ fastapi==0.115.0
 uvicorn==0.30.6
 torch
 torchvision
+timm
 pillow
 numpy
 python-multipart
 opencv-python-headless
+python-dotenv==1.0.1

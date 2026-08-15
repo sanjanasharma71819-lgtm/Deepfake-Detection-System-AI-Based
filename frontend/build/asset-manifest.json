@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4974fac4.css",
+    "main.js": "/static/js/main.dd92d851.js",
+    "static/media/deepfake-bg.jpg": "/static/media/deepfake-bg.ec37cfd0c288d04161ad.jpg",
+    "static/media/dp-bg.jpg": "/static/media/dp-bg.676d95787f9e86cdc27b.jpg",
+    "static/media/deepfake1-bg.jpg": "/static/media/deepfake1-bg.a4c4b26d2dd3c1764cf4.jpg",
+    "index.html": "/index.html",
+    "main.4974fac4.css.map": "/static/css/main.4974fac4.css.map",
+    "main.dd92d851.js.map": "/static/js/main.dd92d851.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4974fac4.css",
+    "static/js/main.dd92d851.js"
+  ]
+}

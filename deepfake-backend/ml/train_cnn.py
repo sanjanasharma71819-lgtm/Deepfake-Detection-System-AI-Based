@@ -8,6 +8,7 @@ from ml.cnn_model import SimpleCNN
 from ml.data_loader import load_data
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Training on: {device}")
 
 
 transform = transforms.Compose([
@@ -17,18 +18,15 @@ transform = transforms.Compose([
 ])
 
 
-from ml.data_loader import load_data
 train_data, val_data, test_data = load_data()
 
+# Build datasets with transforms applied
 train_dataset = DeepfakeDataset(train_data, transform)
 val_dataset = DeepfakeDataset(val_data, transform)
+test_dataset = DeepfakeDataset(test_data, transform)
 
 train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=32)
-
-train_dataset = DeepfakeDataset(train_data)
-val_dataset = DeepfakeDataset(val_data)
-test_dataset = DeepfakeDataset(test_data)
 model = SimpleCNN().to(device)
 
 criterion = nn.CrossEntropyLoss(weight=torch.tensor([1.0, 1.2]).to(device))

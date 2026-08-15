@@ -1,70 +1,195 @@
-# Getting Started with Create React App
+# 🛡️ DeepShield AI — Deepfake Detection System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An AI-powered full-stack web application that detects deepfake images and videos using a dual-model ensemble (SimpleCNN + EfficientNet-B0) with Grad-CAM explainability.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+| Feature | Details |
+|---|---|
+| 🤖 Dual-model ensemble | SimpleCNN + EfficientNet-B0 with soft-voting |
+| 🖼️ Image detection | Upload any JPG/PNG/WEBP for instant analysis |
+| 🎥 Video detection | Extracts 5 evenly-spaced frames, averages predictions |
+| 🔥 Grad-CAM heatmap | Visual explanation of which regions drove the decision |
+| 📸 Live webcam scan | Capture a frame directly from your camera |
+| 📊 Dashboard | Pie chart, scan history, downloadable report |
+| 🔐 Google Auth | Firebase authentication, protected routes |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🏗️ Tech Stack
 
-### `npm test`
+### Frontend
+- **React** (Create React App)
+- **React Router v7** — client-side routing
+- **Firebase Auth** — Google Sign-In
+- **Chart.js / react-chartjs-2** — dashboard charts
+- **react-simple-typewriter** — hero typewriter effect
+- **react-webcam** — live webcam capture
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend
+- **FastAPI** — Python REST API
+- **PyTorch + timm** — model inference
+- **OpenCV** — video frame extraction & Grad-CAM heatmap overlay
+- **Uvicorn** — ASGI server
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Getting Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerequisites
+- Node.js ≥ 18
+- Python ≥ 3.10
+- A [Firebase project](https://console.firebase.google.com) with Google Sign-In enabled
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+### 1. Clone the repo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone https://github.com/your-username/deepfake-detection-system.git
+cd deepfake-detection-system
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Backend setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+cd deepfake-backend
+python -m venv venv
+# Windows:
+.\venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
 
-## Learn More
+pip install -r requirements.txt
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Start the backend server:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+python -m uvicorn main:app --reload --port 8000
+```
 
-### Code Splitting
+The API will be available at `http://localhost:8000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+### 3. Frontend setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+cd frontend
+cp .env.example .env   # then fill in your values
+npm install
+npm start
+```
 
-### Making a Progressive Web App
+The React app will open at `http://localhost:3000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🔑 Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Frontend (`frontend/.env`)
 
-### Deployment
+| Variable | Description |
+|---|---|
+| `REACT_APP_API_URL` | Backend URL (e.g. `http://localhost:8000`) |
+| `REACT_APP_FIREBASE_API_KEY` | Firebase API key |
+| `REACT_APP_FIREBASE_AUTH_DOMAIN` | Firebase auth domain |
+| `REACT_APP_FIREBASE_PROJECT_ID` | Firebase project ID |
+| `REACT_APP_FIREBASE_STORAGE_BUCKET` | Firebase storage bucket |
+| `REACT_APP_FIREBASE_MESSAGING_SENDER_ID` | Firebase messaging sender ID |
+| `REACT_APP_FIREBASE_APP_ID` | Firebase app ID |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Backend (`.env` in project root or `deepfake-backend/`)
 
-### `npm run build` fails to minify
+| Variable | Description |
+|---|---|
+| `ALLOWED_ORIGINS` | Comma-separated list of allowed CORS origins |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## 📡 API Endpoints
+
+| Method | Path | Description |
+|---|---|---|
+| `GET` | `/` | Health check |
+| `POST` | `/predict` | Analyse image or video — returns FAKE/REAL verdict |
+| `POST` | `/heatmap` | Generate Grad-CAM heatmap for an image (returns base64 PNG) |
+
+---
+
+## 🧠 Model Architecture
+
+### SimpleCNN
+- 3 Conv blocks (32 → 64 → 128 channels), each followed by ReLU + MaxPool2d
+- Fully connected classifier: 128×28×28 → 128 → 2
+
+### EfficientNet-B0
+- Pre-trained via `timm` with ImageNet weights
+- Fine-tuned classifier head: `in_features → 2`
+
+### Ensemble
+- **Soft voting**: averages softmax probabilities from both models
+- Final label = argmax of averaged real/fake probabilities
+
+---
+
+## 📂 Project Structure
+
+```
+deepfake-detection-system/
+├── deepfake-backend/
+│   ├── main.py                  # FastAPI app (predict + heatmap endpoints)
+│   ├── requirements.txt
+│   ├── ml/
+│   │   ├── cnn_model.py         # SimpleCNN architecture
+│   │   ├── efficientnet_model.py
+│   │   ├── predictor_cnn.py     # Lazy-loading CNN inference
+│   │   ├── predictor_effnet.py  # Lazy-loading EfficientNet inference
+│   │   ├── compare.py           # Soft-voting ensemble logic
+│   │   ├── gradcam.py           # Grad-CAM heatmap generation
+│   │   ├── train_cnn.py         # CNN training script
+│   │   └── train_efficientnet.py
+│   └── models/
+│       ├── cnn.pth              # Trained CNN weights
+│       ├── efficientnet.pth     # Trained EfficientNet weights
+│       └── frame_extractor.py  # Video → PIL frames (OpenCV)
+│
+└── frontend/
+    ├── .env.example             # Template — copy to .env
+    └── src/
+        ├── App.js               # Router with protected routes
+        ├── firebase.js          # Firebase config (reads from .env)
+        ├── components/
+        │   ├── Navbar.js        # Auth-aware navbar with logout
+        │   └── ProtectedRoute.js
+        └── pages/
+            ├── Landing.js
+            ├── HomePage.js
+            ├── AuthPage.js
+            ├── Upload.js
+            ├── Result.js        # Verdict + Grad-CAM heatmap
+            ├── Dashboard.js
+            ├── Webcam.js
+            └── Contact.js
+```
+
+---
+
+## 🚢 Deployment
+
+| Layer | Platform |
+|---|---|
+| Frontend | [Vercel](https://vercel.com) — set env vars in project settings |
+| Backend | [Render](https://render.com) or [Railway](https://railway.app) |
+
+Set `REACT_APP_API_URL` in Vercel to your deployed backend URL, and set `ALLOWED_ORIGINS` on the backend to your Vercel frontend URL.
+
+---
+
+## 📄 License
+MIT

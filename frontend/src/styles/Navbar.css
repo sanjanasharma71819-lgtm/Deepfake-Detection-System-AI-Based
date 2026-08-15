@@ -1,0 +1,104 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: #000;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: #6c63ff;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+/* Hover underline animation */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -5px;
+  background-color: #6c63ff;
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Active link */
+.active {
+  color: #6c63ff;
+}
+
+/* Login button style */
+.signin {
+  padding: 8px 18px;
+  border: 1px solid #6c63ff;
+  border-radius: 20px;
+}
+
+.signin:hover {
+  background: #6c63ff;
+  color: white;
+}
+
+/* ── Auth user section ─────────────────────────────────────────── */
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #6c63ff;
+  object-fit: cover;
+}
+
+.nav-username {
+  color: #e0e0e0;
+  font-size: 14px;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-logout-btn {
+  padding: 6px 14px;
+  border: 1px solid #ff4b4b;
+  border-radius: 20px;
+  background: transparent;
+  color: #ff4b4b;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.nav-logout-btn:hover {
+  background: #ff4b4b;
+  color: white;
+}

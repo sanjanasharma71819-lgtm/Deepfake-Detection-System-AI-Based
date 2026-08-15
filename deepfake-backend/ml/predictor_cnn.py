@@ -62,6 +62,9 @@ def predict_cnn(image_path):
             probabilities
         ).item()
 
+        # Return raw prob list [real_prob, fake_prob] for ensemble averaging
+        probs_list = probabilities[0].tolist()
+
     del image_tensor
     del output
     del probabilities
@@ -69,5 +72,6 @@ def predict_cnn(image_path):
 
     return {
         "label": "FAKE" if predicted_class == 1 else "REAL",
-        "confidence": round(float(confidence), 4)
+        "confidence": round(float(confidence), 4),
+        "probs": probs_list   # [real_prob, fake_prob]
     }

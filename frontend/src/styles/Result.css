@@ -1,0 +1,232 @@
+.result-container {
+  min-height: 100vh;
+  background: 
+    linear-gradient(rgba(0,0,0,0.8), rgba(35, 64, 113, 0.85)),
+    url("https://ailb-web.ing.unimore.it/static/dfad2023/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.result-card {
+  background: rgba(20, 30, 50, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.result-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #e2e8f0;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 50px;
+  margin: 16px 0;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.confidence-text {
+  font-size: 1rem;
+  color: #94a3b8;
+  margin: 8px 0;
+}
+
+.confidence-text strong {
+  color: #e2e8f0;
+}
+
+.file-text {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+/* ── Model Breakdown Section ── */
+.model-breakdown {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 20px 0 28px;
+  text-align: left;
+}
+
+.model-breakdown h3 {
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ensemble-tag {
+  font-size: 0.72rem;
+  background: rgba(0, 157, 255, 0.18);
+  color: #38bdf8;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.model-card {
+  margin-bottom: 16px;
+}
+
+.model-card:last-child {
+  margin-bottom: 0;
+}
+
+.model-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.model-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.model-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 20px;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.confidence-bar-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 1s ease;
+}
+
+.confidence-label {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ── Dashboard Button ── */
+.dashboard-btn {
+  margin-top: 8px;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #009dff, #0069d9);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(0, 157, 255, 0.3);
+}
+
+.dashboard-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 157, 255, 0.5);
+}
+
+/* ── Loading ── */
+.loading-box {
+  text-align: center;
+}
+
+.loader {
+  margin: 20px auto;
+  width: 50px;
+  height: 50px;
+  border: 5px solid hsl(212, 100%, 50%);
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Grad-CAM Heatmap Section ── */
+.heatmap-section {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(108, 99, 255, 0.25);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 20px 0 24px;
+  text-align: center;
+}
+
+.heatmap-section h3 {
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.heatmap-btn {
+  margin-top: 12px;
+  padding: 10px 28px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #6c63ff, #4a42cc);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.35);
+}
+
+.heatmap-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(108, 99, 255, 0.55);
+}
+
+.heatmap-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.heatmap-result {
+  margin-top: 16px;
+}
+
+.heatmap-img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  border: 2px solid rgba(108, 99, 255, 0.4);
+  box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+}
