@@ -79,24 +79,27 @@ The API will be available at `http://localhost:8000`.
 
 ### 3. Frontend setup
 
-```bash
+```powershell
 cd frontend
-cp .env.example .env   # then fill in your values
 npm install
 npm start
 ```
 
-The React app will open at `http://localhost:3000`.
+The React app will open at `http://localhost:3004`.
 
 ---
 
 ## 🔑 Environment Variables
 
+> **Note**: Environment files containing local configuration or secrets (e.g., `.env`) are **NOT committed** to Git. Use the provided `.env.example` as a template for your own secrets.
+
 ### Frontend (`frontend/.env`)
+The local frontend uses `http://localhost:3004`.
 
 | Variable | Description |
 |---|---|
-| `REACT_APP_API_URL` | Backend URL (e.g. `http://localhost:8000`) |
+| `PORT` | The port the React app runs on (e.g., `3004`) |
+| `REACT_APP_API_URL` | Backend URL (e.g., `http://localhost:8000`) |
 | `REACT_APP_FIREBASE_API_KEY` | Firebase API key |
 | `REACT_APP_FIREBASE_AUTH_DOMAIN` | Firebase auth domain |
 | `REACT_APP_FIREBASE_PROJECT_ID` | Firebase project ID |
@@ -104,11 +107,12 @@ The React app will open at `http://localhost:3000`.
 | `REACT_APP_FIREBASE_MESSAGING_SENDER_ID` | Firebase messaging sender ID |
 | `REACT_APP_FIREBASE_APP_ID` | Firebase app ID |
 
-### Backend (`.env` in project root or `deepfake-backend/`)
+### Backend (`deepfake-backend/.env`)
+The local backend uses `http://localhost:8000`.
 
 | Variable | Description |
 |---|---|
-| `ALLOWED_ORIGINS` | Comma-separated list of allowed CORS origins |
+| `ALLOWED_ORIGINS` | Comma-separated list of allowed CORS origins (controls FastAPI CORS) |
 
 ---
 
@@ -140,42 +144,23 @@ The React app will open at `http://localhost:3000`.
 
 ## 📂 Project Structure
 
-```
-deepfake-detection-system/
+```text
+Deepfake-Detection-System-AI-Based/
 ├── deepfake-backend/
-│   ├── main.py                  # FastAPI app (predict + heatmap endpoints)
-│   ├── requirements.txt
 │   ├── ml/
-│   │   ├── cnn_model.py         # SimpleCNN architecture
-│   │   ├── efficientnet_model.py
-│   │   ├── predictor_cnn.py     # Lazy-loading CNN inference
-│   │   ├── predictor_effnet.py  # Lazy-loading EfficientNet inference
-│   │   ├── compare.py           # Soft-voting ensemble logic
-│   │   ├── gradcam.py           # Grad-CAM heatmap generation
-│   │   ├── train_cnn.py         # CNN training script
-│   │   └── train_efficientnet.py
-│   └── models/
-│       ├── cnn.pth              # Trained CNN weights
-│       ├── efficientnet.pth     # Trained EfficientNet weights
-│       └── frame_extractor.py  # Video → PIL frames (OpenCV)
-│
-└── frontend/
-    ├── .env.example             # Template — copy to .env
-    └── src/
-        ├── App.js               # Router with protected routes
-        ├── firebase.js          # Firebase config (reads from .env)
-        ├── components/
-        │   ├── Navbar.js        # Auth-aware navbar with logout
-        │   └── ProtectedRoute.js
-        └── pages/
-            ├── Landing.js
-            ├── HomePage.js
-            ├── AuthPage.js
-            ├── Upload.js
-            ├── Result.js        # Verdict + Grad-CAM heatmap
-            ├── Dashboard.js
-            ├── Webcam.js
-            └── Contact.js
+│   ├── models/
+│   ├── main.py
+│   └── requirements.txt
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   ├── package-lock.json
+│   └── .env.example
+├── .gitignore
+├── .vercelignore
+├── README.md
+└── runtime.txt
 ```
 
 ---
@@ -184,10 +169,11 @@ deepfake-detection-system/
 
 | Layer | Platform |
 |---|---|
-| Frontend | [Vercel](https://vercel.com) — set env vars in project settings |
+| Frontend | [Vercel](https://vercel.com) |
 | Backend | [Render](https://render.com) or [Railway](https://railway.app) |
 
-Set `REACT_APP_API_URL` in Vercel to your deployed backend URL, and set `ALLOWED_ORIGINS` on the backend to your Vercel frontend URL.
+- **Frontend**: Set `REACT_APP_API_URL` in Vercel to your deployed FastAPI backend URL.
+- **Backend**: Set `ALLOWED_ORIGINS` on the backend to your deployed Vercel frontend URL so that CORS requests are permitted.
 
 ---
 
