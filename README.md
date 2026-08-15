@@ -178,4 +178,9 @@ Deepfake-Detection-System-AI-Based/
 ---
 
 ## 📄 License
-MIT
+
+© 2026 Sanjana Sharma. All Rights Reserved.
+
+This project is available for viewing and evaluation purposes.
+No permission is granted to copy, modify, distribute, or reuse
+the source code without prior written permission.
